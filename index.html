@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Python Browser Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="https://cdn.jsdelivr.net/pyodide/v0.29.4/full/pyodide.js"></script>
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <div class="bg-decor" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+    </div>
+
+    <main class="app">
+      <section class="workspace" aria-label="Python runner">
+        <header class="topbar">
+          <div class="brand">
+            <div class="logo" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28">
+                <defs>
+                  <linearGradient id="lg1" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stop-color="#3b82f6" />
+                    <stop offset="1" stop-color="#06b6d4" />
+                  </linearGradient>
+                  <linearGradient id="lg2" x1="0" x2="1" y1="1" y2="0">
+                    <stop offset="0" stop-color="#f59e0b" />
+                    <stop offset="1" stop-color="#fbbf24" />
+                  </linearGradient>
+                </defs>
+                <path fill="url(#lg1)" d="M16 2c-4 0-7 1.5-7 5v3h7v1H7c-3 0-5 2-5 6s2 6 5 6h2v-3c0-3 3-5 7-5h6c3 0 5-2 5-5V7c0-3-2-5-5-5h-6zm-3 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" />
+                <path fill="url(#lg2)" d="M16 30c4 0 7-1.5 7-5v-3h-7v-1h9c3 0 5-2 5-6s-2-6-5-6h-2v3c0 3-3 5-7 5h-6c-3 0-5 2-5 5v3c0 3 2 5 5 5h6zm3-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+              </svg>
+            </div>
+            <div>
+              <p class="eyebrow">Pyodide · WebAssembly</p>
+              <h1>Python Browser Lab</h1>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <div class="status" id="status">
+              <span class="status-dot"></span>
+              <span class="status-text">Dang tai Python...</span>
+            </div>
+            <button id="themeToggle" class="icon-btn" type="button" aria-label="Doi che do sang/toi" title="Doi che do sang/toi">
+              <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+              </svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="panes">
+          <section class="pane">
+            <div class="pane-head">
+              <div class="pane-title">
+                <span class="dot dot-r"></span>
+                <span class="dot dot-y"></span>
+                <span class="dot dot-g"></span>
+                <h2>main.py</h2>
+              </div>
+              <button id="runButton" class="primary" type="button" disabled>
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                Run Python
+              </button>
+            </div>
+            <textarea id="code" spellcheck="false">import sys
+print("Xin chao tu Python!")
+print(sys.version)
+
+sum([1, 2, 3, 4, 5])</textarea>
+          </section>
+
+          <section class="pane">
+            <div class="pane-head">
+              <div class="pane-title">
+                <span class="terminal-icon" aria-hidden="true">&gt;_</span>
+                <h2>Ket qua</h2>
+              </div>
+              <button id="clearButton" type="button" class="ghost-btn">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
+                Xoa
+              </button>
+            </div>
+            <pre id="output">Dang khoi dong Pyodide...</pre>
+          </section>
+        </div>
+
+      </section>
+    </main>
+  </body>
+</html>
