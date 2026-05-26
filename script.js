@@ -138,16 +138,21 @@ def _has_input_in_sync_def(tree):
 
 _src = __user_code
 _tree = ast.parse(_src)
+_scope = {
+    "__name__": "__main__",
+    "__builtins__": builtins,
+    "__ainput": __ainput,
+}
 
 if _has_input_in_sync_def(_tree):
     # Co input() nam trong def thong thuong -> khong the dung await.
     # Fallback: dung input mac dinh cua Pyodide (window.prompt).
-    exec(compile(_src, '<main.py>', 'exec'), globals())
+    exec(compile(_src, '<main.py>', 'exec'), _scope)
 else:
     _tree = ast.fix_missing_locations(_InputTransformer().visit(_tree))
     _code = compile(_tree, '<main.py>', 'exec',
                     flags=ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
-    _result = eval(_code, globals())
+    _result = eval(_code, _scope)
     if _result is not None:
         await _result
 `;
