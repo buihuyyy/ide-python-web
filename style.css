@@ -421,6 +421,29 @@ pre {
 }
 
 
+.input-line {
+  display: inline;
+}
+
+.inline-input {
+  display: inline-block;
+  min-width: 120px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--output-ink);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  caret-color: var(--accent-2);
+}
+
+.inline-input::after {
+  content: "";
+}
+
 pre::-webkit-scrollbar,
 textarea::-webkit-scrollbar {
   width: 10px;
