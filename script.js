@@ -7,6 +7,7 @@ const clearButton = document.getElementById("clearButton");
 const themeToggle = document.getElementById("themeToggle");
 
 const THEME_KEY = "pbl-theme";
+const APP_VERSION = "20260527-1";
 const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 const savedTheme = localStorage.getItem(THEME_KEY);
 const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
@@ -179,3 +180,22 @@ async function runPython() {
 runButton.addEventListener("click", runPython);
 
 clearButton.addEventListener("click", clearOutput);
+
+async function checkForNewVersion() {
+  try {
+    const response = await fetch(`./version.json?t=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) return;
+
+    const data = await response.json();
+    if (data.version && data.version !== APP_VERSION) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("v", data.version);
+      window.location.replace(url.toString());
+    }
+  } catch {
+    // Bo qua loi mang de trang van chay binh thuong.
+  }
+}
+
+checkForNewVersion();
+setInterval(checkForNewVersion, 30000);
